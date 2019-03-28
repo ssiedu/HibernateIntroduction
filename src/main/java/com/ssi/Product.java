@@ -6,17 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="items")
 public class Product {
 	@Id
-	@Column(name="productId")
 	private int pcode;
-	@Column(name="productName")
 	private String pname;
-	@Column(name="cost")
 	private int price;
-	
-	
 	
 	public Product() {
 		super();

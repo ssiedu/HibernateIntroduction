@@ -13,16 +13,19 @@ public class AddProducts {
 		p1.setPcode(111); p1.setPname("AAA"); p1.setPrice(500);
 		Product p2=new Product(112,"BBB",600);
 		Product p3=new Product(113,"CCC",700);
-		
-		Configuration config=new Configuration().configure();
+		//Configuration config=new Configuration().configure(); we can use zero arg method for hibernate.cfg.xml
+		Configuration config=new Configuration().configure("myconfig.xml");
 		SessionFactory sessionFactory=config.buildSessionFactory();
 		Session session=sessionFactory.openSession();
 		
 		Transaction tr=session.beginTransaction();
 		
-		session.save(p1);
-		session.save(p2);
-		session.save(p3);
+		Product p=new Product(114,"DDD",800);
+		session.save(p);
+		
+		//session.save(p1);
+		//session.save(p2);
+		//session.save(p3);
 		
 		tr.commit();
 		
