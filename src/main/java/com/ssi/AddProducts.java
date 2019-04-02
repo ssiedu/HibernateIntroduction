@@ -1,39 +1,29 @@
 package com.ssi;
 
+import java.util.Scanner;
+
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 public class AddProducts {
 
 	public static void main(String[] args) {
 
-		Product p1=new Product();
-		p1.setPcode(111); p1.setPname("AAA"); p1.setPrice(500);
-		Product p2=new Product(112,"BBB",600);
-		Product p3=new Product(113,"CCC",700);
-		//Configuration config=new Configuration().configure(); we can use zero arg method for hibernate.cfg.xml
-		Configuration config=new Configuration().configure("myconfig.xml");
-		SessionFactory sessionFactory=config.buildSessionFactory();
-		Session session=sessionFactory.openSession();
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Product Code");
+		int pcode=sc.nextInt();
+		System.out.println("Enter Product Name");
+		String pname=sc.next();
+		System.out.println("Enter Product Price");
+		int price=sc.nextInt();
 		
+		Product product=new Product(pcode,pname,price);
+		Session session=Util.getSF().openSession();
 		Transaction tr=session.beginTransaction();
-		
-		Product p=new Product(114,"DDD",800);
-		session.save(p);
-		
-		//session.save(p1);
-		//session.save(p2);
-		//session.save(p3);
-		
+		session.save(product);
 		tr.commit();
-		
 		session.close();
-		
-		System.out.println("DATA STORED");
-		
-		
+		System.out.println("Record Added");
 		
 
 	}

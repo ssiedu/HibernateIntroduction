@@ -1,5 +1,7 @@
 package com.ssi;
 
+import java.util.Scanner;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
@@ -7,17 +9,26 @@ import org.hibernate.cfg.Configuration;
 public class ChangeDetails {
 	public static void main(String[] args) {
 
-		Configuration config=new Configuration().configure("myconfig.xml");
-		Session session=config.buildSessionFactory().openSession();
-		Product p=new Product();
-		p.setPcode(113);
-		p.setPname("XYZ");
-		p.setPrice(750);
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Product Code");
+		int pcode=sc.nextInt();
+		System.out.println("Enter New Price");
+		int newprice=sc.nextInt();
+		
+		Session session=Util.getSF().openSession();
+		
+		Product product=session.get(Product.class, pcode);	
+		product.setPrice(newprice);		
+		
+		
 		Transaction tr=session.beginTransaction();
-		session.update(p);
+		session.update(product);
+		
+				
 		tr.commit();
-		System.out.println("Product Modified Successfully");
 		session.close();
+		
+		System.out.println("Product Modified");
 		
 
 	}

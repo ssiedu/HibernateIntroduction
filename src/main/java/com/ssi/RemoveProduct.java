@@ -1,5 +1,7 @@
 package com.ssi;
 
+import java.util.Scanner;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
@@ -8,14 +10,21 @@ public class RemoveProduct {
 
 	public static void main(String[] args) {
 
-		Configuration config=new Configuration().configure("myconfig.xml");
-		Session session=config.buildSessionFactory().openSession();
-		Product p=new Product();
-		p.setPcode(114);
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Product Code To Be Removed");
+		int pcode=sc.nextInt();
+		
+		Product product=new Product(); 
+		product.setPcode(pcode);
+		
+		Session session=Util.getSF().openSession();
 		Transaction tr=session.beginTransaction();
-		session.delete(p);
+		session.delete(product);
 		tr.commit();
-		System.out.println("Product Removed Successfully");
+		
+		session.close();
+		
+		System.out.println("Product Removed");
 		
 		
 
