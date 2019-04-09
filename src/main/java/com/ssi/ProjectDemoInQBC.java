@@ -15,7 +15,6 @@ public class ProjectDemoInQBC {
 		Session session=Util.getSF().openSession();
 		Criteria criteria=session.createCriteria(Product.class);
 		
-		
 		ProjectionList pList=Projections.projectionList();
 		
 		Projection pr1=Projections.property("pcode");
@@ -35,10 +34,6 @@ public class ProjectDemoInQBC {
 			}
 			System.out.println("________________________________");
 		}
-		
-		
-		
-
 		
 		
 		
